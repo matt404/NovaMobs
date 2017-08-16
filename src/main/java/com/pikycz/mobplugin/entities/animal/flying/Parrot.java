@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Parrot extends FlyingAnimal {
     
-    public static final int NETWORK_ID = 30;
+    //public static final int NETWORK_ID = 30; I dont know now
     
 
     public Parrot(FullChunk chunk, CompoundTag nbt) {
