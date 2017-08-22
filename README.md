@@ -1,10 +1,8 @@
-# MobPlugin 
+# NovaMobs 
 
 Development: **[PikyCZ](https://github.com/PikyCZ)**
 
 [![CircleCI](https://circleci.com/gh/PikyCZ/MobPlugin/tree/master.svg?style=shield&circle-token=)](https://circleci.com/gh/PikyCZ/MobPlugin/tree/master) //Fix Build
-
-![mobplugin](https://github.com/PikyCZ/MobPlugin/blob/master/images/MobPlugin.png)
 
 NovaMobs is a plugin that implements the mob entities for MCPE including movement, aggression etc.
 
