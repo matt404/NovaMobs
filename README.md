@@ -6,7 +6,7 @@ Development: **[PikyCZ](https://github.com/PikyCZ)**
 
 ![mobplugin](https://github.com/PikyCZ/MobPlugin/blob/master/images/MobPlugin.png)
 
-MobPlugin is a plugin that implements the mob entities for MCPE including movement, aggression etc.
+NovaMobs is a plugin that implements the mob entities for MCPE including movement, aggression etc.
 
 # Commands
 | Command | Usage | Description |
@@ -15,17 +15,17 @@ MobPlugin is a plugin that implements the mob entities for MCPE including moveme
 | `/mob spawn <mob_name>` | `/mob spawn <mob_name>` | Spawn mob (mob_name write always with a capital letter.. For example: Pig,Zombie)
 | `/mob removemobs` | `/mob removemobs` | Remove all living mobs|
 | `/mob removeitems` | `/mob removeitems` | Remove all items from all levels (ground)|
-| `/mob version` | `/mob version` | Show moblugin version|
+| `/mob version` | `/mob version` | Show novamobs version|
 
 # Permissions
 ```yml
- mob-plugin.mob:
+ novamobs.mob:
     default: op
   ```
 
 __[Jar Download at Circle CI](https://circleci.com/gh/PikyCZ/MobPlugin/tree/master/)__ (**login required**)
 
-__[Jar Download at Releases tab](https://github.com/PikyCZ/MobPlugin/releases)__ (**WorkingVersions**)
+__[Jar Download at Releases tab](https://github.com/PikyCZ/NovaMobs/releases)__ (**WorkingVersions**)
 
 # Contributed code since 2016
 * [PikyCZ](//github.com/PikyCZ)
