@@ -29,4 +29,4 @@ __[Jar Download at Releases tab](https://github.com/PikyCZ/NovaMobs/releases)__ 
 * [PikyCZ](//github.com/PikyCZ)
 * [Creeperface01](//github.com/Creeperface01)
 * [Asuna-Yuuki](//https://github.com/Asuna-Yuuki)
-* [caspervanneck](//https://github.com/caspervanneck)
+* [wbzhang2594](//https://github.com/wbzhang2594)
