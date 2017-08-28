@@ -2,7 +2,9 @@
 
 Development: **[PikyCZ](https://github.com/PikyCZ)**
 
-[![Github All Releases](https://img.shields.io/github/downloads/PikyCZ/NovaMobs/total.svg)](https://github.com/PikyCZ/NovaMobs/releases) [![GitHub release](https://img.shields.io/github/release/PikyCZ/NovaMobs.svg)](https://github.com/PikyCZ/NovaMobs/releases/latest)
+[![Github All Releases](https://img.shields.io/github/downloads/PikyCZ/NovaMobs/total.svg)](https://github.com/PikyCZ/NovaMobs/releases)
+[![GitHub release](https://img.shields.io/github/release/PikyCZ/NovaMobs.svg)](https://github.com/PikyCZ/NovaMobs/releases/latest)
+[![](https://img.shields.io/badge/stable-status-brightgreen.svg)](status/status.md)
 
 NovaMobs is a plugin that implements the mob entities for MCPE including movement, aggression etc.
 
