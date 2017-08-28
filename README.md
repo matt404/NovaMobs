@@ -9,6 +9,7 @@ Development: **[PikyCZ](https://github.com/PikyCZ)**
 NovaMobs is a plugin that implements the mob entities for MCPE including movement, aggression etc.
 
 # Commands
+-----------
 | Command | Usage | Description |
 | ------- |  ----- | ----------- |
 | `/mob` | `/mob` | Display list of commands|
@@ -18,11 +19,18 @@ NovaMobs is a plugin that implements the mob entities for MCPE including movemen
 | `/mob version` | `/mob version` | Show novamobs version|
 
 # Permissions
+-------------
 ```yml
  novamobs.mob:
     default: op
   ```
-
+  
+ In NovaMobs has been added mobs 
+ -------------------------------
+ :wolf:,:rabbit:,:pig2:,:horse:,:sheep:,:chicken:,:cow2:,:bird:(1.2),:space_invader:,:squirrel:
+ 
+ Download
+ ---------
 __[Jar Download at Circle CI](https://circleci.com/gh/PikyCZ/MobPlugin/tree/master/)__ (**login required**)
 
 __[Jar Download at Releases tab](https://github.com/PikyCZ/NovaMobs/releases)__ (**WorkingVersions**)
