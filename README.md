@@ -1,4 +1,4 @@
-# NovaMobs 
+# ✨NovaMobs✨ 
 
 Development: **[PikyCZ](https://github.com/PikyCZ)**
 
