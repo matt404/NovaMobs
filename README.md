@@ -6,7 +6,7 @@ Development: **[PikyCZ](https://github.com/PikyCZ)**
 [![GitHub release](https://img.shields.io/github/release/PikyCZ/NovaMobs.svg)](https://github.com/PikyCZ/NovaMobs/releases/latest)
 [![](https://img.shields.io/badge/stable-status-brightgreen.svg)](status/status.md)
 
-NovaMobs is a plugin that implements the mob entities for MCPE including movement, aggression etc.
+NovaMobs is a plugin that implements the mob entities for MCPE including movement (Simple)
 
 # Commands
 -----------
@@ -24,10 +24,6 @@ NovaMobs is a plugin that implements the mob entities for MCPE including movemen
  novamobs.mob:
     default: op
   ```
-  
- In NovaMobs has been added mobs 
- -------------------------------
- :wolf:,:rabbit:,:pig2:,:horse:,:sheep:,:chicken:,:cow2:,:bird:(1.2),:space_invader:,:squirrel:
  
  Download
  ---------
