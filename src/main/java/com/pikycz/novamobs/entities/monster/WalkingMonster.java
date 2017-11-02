@@ -12,12 +12,10 @@ import cn.nukkit.math.NukkitMath;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.potion.Effect;
-
 import co.aikar.timings.Timings;
 
 import com.pikycz.novamobs.entities.WalkingEntity;
 import com.pikycz.novamobs.entities.monster.walking.Enderman;
-//import com.pikycz.mobplugin.entities.monster.walking.Shulker;
 import com.pikycz.novamobs.utils.Utils;
 
 public abstract class WalkingMonster extends WalkingEntity implements Monster {
@@ -229,13 +227,6 @@ public abstract class WalkingMonster extends WalkingEntity implements Monster {
         }
         return true;
     }
-    
-    /*public boolean openS(){ //I dont know how to do this.. open and closed Shulker
-        if (this instanceof Shulker){
-            
-        }
-        return true;     
-    }*/
 
     @Override
     public boolean entityBaseTick(int tickDiff) {

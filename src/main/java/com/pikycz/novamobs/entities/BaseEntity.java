@@ -26,10 +26,21 @@ import java.util.Iterator;
 import java.util.List;
 
 public abstract class BaseEntity extends EntityCreature {
+    
+    private AttributeMap attributeMap;
 
     protected int stayTime = 0;
 
     protected int moveTime = 0;
+    ///Jump
+    private int maxJumpHeight = 1; // default: 1 block jump height - this should be 2 for horses e.g.
+    protected boolean isJumping;
+    public float jumpMovementFactor = 0.02F;
+    private int jumpTicks;
+    ///
+    public float speed = 1.0f;
+    
+    public double moveMultifier = 1.0d;
 
     protected Vector3 target = null;
 
@@ -38,8 +49,6 @@ public abstract class BaseEntity extends EntityCreature {
     protected Entity followTarget = null;
 
     public boolean inWater = false;
-
-    public double moveMultifier = 1.0d;
 
     public boolean inLava = false;
 
@@ -53,16 +62,16 @@ public abstract class BaseEntity extends EntityCreature {
 
     private boolean wallcheck = true;
 
-    private int maxJumpHeight = 1; // default: 1 block jump height - this should be 2 for horses e.g.
-
-    public float speed = 1.0f;
-
     protected List<Block> blocksAround = new ArrayList<>();
 
     protected List<Block> collisionBlocks = new ArrayList<>();
 
     public BaseEntity(FullChunk chunk, CompoundTag nbt) {
         super(chunk, nbt);
+    }
+    
+    public AttributeMap getAttributeMap() {
+        return this.attributeMap;
     }
 
     public abstract int getKillExperience();

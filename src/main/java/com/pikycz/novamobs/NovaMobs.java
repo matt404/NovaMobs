@@ -1,39 +1,7 @@
 package com.pikycz.novamobs;
 
-import com.pikycz.novamobs.entities.projectile.BlueWitherSkull;
-import com.pikycz.novamobs.entities.projectile.DragonFireBall;
-import com.pikycz.novamobs.entities.projectile.GhastFireBall;
-import com.pikycz.novamobs.entities.projectile.BlazeFireBall;
-import com.pikycz.novamobs.entities.monster.walking.ZombieVillager;
-import com.pikycz.novamobs.entities.monster.walking.CaveSpider;
-import com.pikycz.novamobs.entities.monster.walking.Witch;
-import com.pikycz.novamobs.entities.monster.walking.Skeleton;
-import com.pikycz.novamobs.entities.monster.walking.Enderman;
-import com.pikycz.novamobs.entities.monster.walking.Husk;
-import com.pikycz.novamobs.entities.monster.walking.PigZombie;
-import com.pikycz.novamobs.entities.monster.walking.Spider;
-import com.pikycz.novamobs.entities.monster.walking.Zombie;
-import com.pikycz.novamobs.entities.monster.walking.Silverfish;
-import com.pikycz.novamobs.entities.monster.walking.Stray;
-import com.pikycz.novamobs.entities.monster.walking.Creeper;
-import com.pikycz.novamobs.entities.animal.walking.Mooshroom;
-import com.pikycz.novamobs.entities.animal.walking.Mule;
-import com.pikycz.novamobs.entities.animal.walking.SkeletonHorse;
-import com.pikycz.novamobs.entities.animal.walking.Chicken;
-import com.pikycz.novamobs.entities.animal.walking.Sheep;
-import com.pikycz.novamobs.entities.animal.walking.Ocelot;
-import com.pikycz.novamobs.entities.animal.walking.PolarBear;
-import com.pikycz.novamobs.entities.animal.walking.Rabbit;
-import com.pikycz.novamobs.entities.animal.walking.ZombieHorse;
-import com.pikycz.novamobs.entities.animal.walking.Villager;
-import com.pikycz.novamobs.entities.animal.walking.Donkey;
-import com.pikycz.novamobs.entities.animal.walking.Horse;
-import com.pikycz.novamobs.entities.animal.walking.Cow;
-import com.pikycz.novamobs.entities.animal.walking.Pig;
-import com.pikycz.novamobs.entities.animal.flying.Bat;
 import cn.nukkit.Player;
-import cn.nukkit.blockentity.BlockEntity;
-import cn.nukkit.command.Command;
+import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.item.EntityItem;
@@ -47,78 +15,98 @@ import cn.nukkit.nbt.tag.DoubleTag;
 import cn.nukkit.nbt.tag.FloatTag;
 import cn.nukkit.nbt.tag.ListTag;
 import cn.nukkit.plugin.PluginBase;
-import cn.nukkit.utils.ConfigSection;
+import cn.nukkit.utils.Config;
 import cn.nukkit.utils.TextFormat;
 
+import com.pikycz.novamobs.configsection.MainConfig;
+import com.pikycz.novamobs.entities.projectile.*;
 import com.pikycz.novamobs.entities.BaseEntity;
-import com.pikycz.novamobs.entities.monster.walking.Wolf;
-import com.pikycz.novamobs.entities.block.BlockEntitySpawner;
-import com.pikycz.novamobs.utils.Utils;
+import com.pikycz.novamobs.entities.animal.flying.*;
+import com.pikycz.novamobs.entities.animal.walking.*;
+import com.pikycz.novamobs.entities.monster.flying.*;
+import com.pikycz.novamobs.entities.monster.walking.*;
+
+import com.pikycz.novamobs.task.AutoSpawnTask;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import java.util.Timer;
 
 public class NovaMobs extends PluginBase implements Listener {
 
-    private ConfigSection entities;
-    private static NovaMobs Instance;
+    private static NovaMobs instance;
 
-    static NovaMobs getInstance() {
-        return Instance;
+    public NovaMobs plugin;
+
+    public final HashMap<Integer, Level> levelsToSpawn = new HashMap<>();
+
+    public List<String> disabledWorlds;
+    
+    public String PluginPrefix = "&c[&bNova&6Mobs&c]";
+    public String StringVersion = "&c[&aRe&cC&ar&be&5a&ct&2e&c]";
+    public String IntVersion = "&c[&a1.2&c]";
+
+    public static NovaMobs getInstance() {
+        return instance;
     }
-
-    private int counter = 0;
 
     @Override
     public void onLoad() {
-        registerEntities();
-        Utils.logServerInfo("Loading MobPlugin");
-        Utils.logServerInfo("Version - 1.1-Dev");
+        if (instance == null) {
+            instance = this;
+        }
+
+        this.getServer().getLogger().info(TextFormat.colorize("&bL&fo&ea&cd&di&en&fg" + PluginPrefix + StringVersion));
+        this.getServer().getLogger().info(TextFormat.colorize(IntVersion));
     }
 
     @Override
     public void onEnable() {
-        Instance = this;
         this.getServer().getPluginManager().registerEvents(this, this);
-    }
-
-    private void registerEntities() {
-        // register Passive entities
-        Entity.registerEntity(Bat.class.getSimpleName(), Bat.class); //Fly too high
-        Entity.registerEntity(Chicken.class.getSimpleName(), Chicken.class);
-        Entity.registerEntity(Cow.class.getSimpleName(), Cow.class);
-        Entity.registerEntity(Donkey.class.getSimpleName(), Donkey.class);
-        Entity.registerEntity(Horse.class.getSimpleName(), Horse.class);
-        Entity.registerEntity(Mooshroom.class.getSimpleName(), Mooshroom.class);
-        Entity.registerEntity(Mule.class.getSimpleName(), Mule.class);
-        Entity.registerEntity(Ocelot.class.getSimpleName(), Ocelot.class);
-        Entity.registerEntity(Pig.class.getSimpleName(), Pig.class);
-        Entity.registerEntity(PolarBear.class.getSimpleName(), PolarBear.class);
-        Entity.registerEntity(Rabbit.class.getSimpleName(), Rabbit.class);
-        Entity.registerEntity(Sheep.class.getSimpleName(), Sheep.class);
-        Entity.registerEntity(SkeletonHorse.class.getSimpleName(), SkeletonHorse.class);
-        Entity.registerEntity(Villager.class.getSimpleName(), Villager.class);
-        Entity.registerEntity(Wolf.class.getSimpleName(), Wolf.class);
-        Entity.registerEntity(ZombieHorse.class.getSimpleName(), ZombieHorse.class);
+        
+        //register Passive entities
+        this.registerEntity("Bat", Bat.class); //Fly too high
+        this.registerEntity("Chicken", Chicken.class);
+        this.registerEntity("Cow", Cow.class);
+        this.registerEntity("Donkey", Donkey.class);
+        this.registerEntity("Horse", Horse.class);
+        this.registerEntity("Mooshroom", Mooshroom.class);
+        this.registerEntity("Mule", Mule.class);
+        this.registerEntity("Ocelot", Ocelot.class);
+        this.registerEntity("Pig", Pig.class);
+        this.registerEntity("PolarBear", PolarBear.class);
+        this.registerEntity("Rabbit", Rabbit.class);
+        this.registerEntity("Sheep", Sheep.class);
+        this.registerEntity("SkeletonHorse", SkeletonHorse.class);
+        this.registerEntity("Villager", Villager.class);
+        this.registerEntity("Wolf", Wolf.class);
+        this.registerEntity("ZombieHorse", ZombieHorse.class);
 
         //register Monster entities
-        //Entity.registerEntity(Blaze.class.getSimpleName(), Blaze.class);
-        //Entity.registerEntity(EnderDragon.class.getSimpleName(), EnderDragon.class); //TODO: Spawn in End
-        //Entity.registerEntity(Wither.class.getSimpleName(), Wither.class);
-        //Entity.registerEntity(ElderGuardian.class.getSimpleName(), ElderGuardian.class); //TODO: Spawn in Ocean palace swim , attack
-        //Entity.registerEntity(Ghast.class.getSimpleName(), Ghast.class); //TODO: Spawn in Nether
-        //Entity.registerEntity(Guardian.class.getSimpleName(), Guardian.class); //TODO: Spawn in Ocean palace swim , attack
-        Entity.registerEntity(CaveSpider.class.getSimpleName(), CaveSpider.class);
-        Entity.registerEntity(Creeper.class.getSimpleName(), Creeper.class);
-        Entity.registerEntity(Enderman.class.getSimpleName(), Enderman.class); //TODO: Move(teleport) , attack
-        //Entity.registerEntity(MagmaCube.class.getSimpleName(), MagmaCube.class);//Spawn In Nether
-        Entity.registerEntity(PigZombie.class.getSimpleName(), PigZombie.class);//Spawn in Nether
-        Entity.registerEntity(Silverfish.class.getSimpleName(), Silverfish.class); //TODO: Spawn random from stone
-        Entity.registerEntity(Skeleton.class.getSimpleName(), Skeleton.class);
-        //Entity.registerEntity(Slime.class.getSimpleName(), Slime.class); //TODO: Make random spawn Slime (Big,Small)
-        Entity.registerEntity(Spider.class.getSimpleName(), Spider.class);
-        Entity.registerEntity(Stray.class.getSimpleName(), Stray.class);
-        Entity.registerEntity(Witch.class.getSimpleName(), Witch.class);
-        Entity.registerEntity(Husk.class.getSimpleName(), Husk.class);
-        Entity.registerEntity(Zombie.class.getSimpleName(), Zombie.class);
-        Entity.registerEntity(ZombieVillager.class.getSimpleName(), ZombieVillager.class);
+        this.registerEntity("Blaze", Blaze.class);
+        this.registerEntity("EnderDragon", EnderDragon.class); //TODO: Spawn in End
+        this.registerEntity("Wither", Wither.class);
+        //this.registerEntity("ElderGuardian", ElderGuardian.class); //TODO: Spawn in Ocean palace swim , attack
+        this.registerEntity("Ghast", Ghast.class); //TODO: Spawn in Nether
+        //this.registerEntity("Guardian", Guardian.class); //TODO: Spawn in Ocean palace swim , attack
+        this.registerEntity("CaveSpider", CaveSpider.class);
+        this.registerEntity("Creeper", Creeper.class);
+        this.registerEntity("Enderman", Enderman.class); //TODO: Move(teleport) , attack
+        //this.registerEntity("MagmaCube", MagmaCube.class);//Spawn In Nether
+        this.registerEntity("PigZombie", PigZombie.class);//Spawn in Nether
+        this.registerEntity("SilverFish", Silverfish.class); //TODO: Spawn random from stone
+        this.registerEntity("Skeleton", Skeleton.class);
+        //this.registerEntity("Slime", Slime.class); //TODO: Make random spawn Slime (Big,Small)
+        this.registerEntity("Spider", Spider.class);
+        //this.registerEntity("Stray", Stray.class);
+        this.registerEntity("Witch", Witch.class);
+        this.registerEntity("Husk", Husk.class);
+        this.registerEntity("Zombie", Zombie.class);
+        this.registerEntity("ZombieVillager", ZombieVillager.class);
 
         // register the fireball entity
         Entity.registerEntity("BlueWitherSkull", BlueWitherSkull.class);
@@ -126,12 +114,43 @@ public class NovaMobs extends PluginBase implements Listener {
         Entity.registerEntity("DragonFireBall", DragonFireBall.class);
         Entity.registerEntity("GhastDireBall", GhastFireBall.class);
 
-        // register the mob spawner (which is probably not needed anymore)
-        BlockEntity.registerBlockEntity("MobSpawner", BlockEntitySpawner.class);
+        this.getServer().getLogger().info("Register: Entites - Done.");     
+        
+        //Config reading and writing
+        Config config = new Config(
+                new File(this.getDataFolder(), "config.yml"),
+                Config.YAML,
+                new LinkedHashMap<String, Object>() {
+            {
+                put("worlds-spawn-disabled", new ArrayList());
+                put("spawn-animals", true);
+                put("spawn-mobs", true);
+                put("auto-spawn-tick", 20);
+            }
+        });
+        config.save();
 
-        Utils.logServerInfo("Register: Entites/Blocks/Items - Done.");
+        if (MainConfig.SpawnDelay > 0) {
+
+            Timer timer = new Timer();
+
+            timer.schedule(new AutoSpawnTask(this), 10000, 1000);
+        }
+
+        for (Level level : Server.getInstance().getLevels().values()) {
+            if (disabledWorlds.contains(level.getFolderName().toLowerCase())) {
+                continue;
+            }
+
+            levelsToSpawn.put(level.getId(), level);
+        }
+
     }
-
+    
+    private void registerEntity(String name, Class<? extends BaseEntity> clazz) {
+        Entity.registerEntity(name, clazz, true);
+    }
+    
     /**
      * @param commandSender
      * @param cmd
@@ -140,10 +159,8 @@ public class NovaMobs extends PluginBase implements Listener {
      * @return
      */
     @Override
-    public boolean onCommand(CommandSender commandSender, Command cmd, String label, String[] args) {
+    public boolean onCommand(CommandSender commandSender, cn.nukkit.command.Command cmd, String label, String[] args) {
         if (cmd.getName().toLowerCase().equals("mob")) {
-
-            String output = "";
 
             if (args.length == 0) {
                 commandSender.sendMessage(TextFormat.GOLD + "--NovaMobs 1.1--");
@@ -151,10 +168,13 @@ public class NovaMobs extends PluginBase implements Listener {
                 commandSender.sendMessage(TextFormat.GREEN + "/mob removemobs" + TextFormat.YELLOW + "- Remove all Mobs");
                 commandSender.sendMessage(TextFormat.GREEN + "/mob removeitems" + TextFormat.YELLOW + "- Remove all items on ground");
                 commandSender.sendMessage(TextFormat.RED + "/mob version" + TextFormat.YELLOW + "- Show MobPlugin Version");
-                commandSender.sendMessage(TextFormat.RED + "/mob info" + TextFormat.YELLOW + "- Show info result");
             } else {
                 switch (args[0]) {
+                    
                     case "summon":
+                        if (!(commandSender instanceof Player)) {
+                            commandSender.sendMessage("You Must use only in game");
+                        }
                         String mob = args[1];
                         Player playerThatSpawns = null;
 
@@ -170,12 +190,12 @@ public class NovaMobs extends PluginBase implements Listener {
                             Entity ent;
                             if ((ent = NovaMobs.create(mob, pos)) != null) {
                                 ent.spawnToAll();
-                                output += "Spawned " + mob + " to " + playerThatSpawns.getName();
+                                commandSender.sendMessage("Spawned " + mob + " to " + playerThatSpawns.getName());
                             } else {
-                                output += "Unable to spawn " + mob;
+                                commandSender.sendMessage("Unable to spawn " + mob);
                             }
                         } else {
-                            output += "Unknown player " + (args.length == 3 ? args[2] : ((Player) commandSender).getName());
+                            commandSender.sendMessage("Unknown player " + (args.length == 3 ? args[2] : ((Player) commandSender).getName()));
                         }
                         break;
                     case "removemobs":
@@ -188,7 +208,7 @@ public class NovaMobs extends PluginBase implements Listener {
                                 }
                             }
                         }
-                        output += "Removed " + count + " entities from all levels.";
+                        commandSender.sendMessage("Removed " + count + " entities from all levels.");
                         break;
                     case "removeitems":
                         count = 0;
@@ -200,43 +220,69 @@ public class NovaMobs extends PluginBase implements Listener {
                                 }
                             }
                         }
-                        output += "Removed " + count + " items on ground from all levels.";
+                        commandSender.sendMessage("Removed " + count + " items on ground from all levels.");
                         break;
                     case "version":
-                        commandSender.sendMessage(TextFormat.GREEN + "Version > 1.1 working with MCPE 1.1");//Todo Automatic Updater?
+                        commandSender.sendMessage(TextFormat.GREEN + "Version > 1.2 working with MCPE 1.2.2");//Todo Automatic Updater?
                         break;
                     default:
-                        output += "Unkown command.";
+                        commandSender.sendMessage("Unkown command.");
                         break;
                 }
             }
-
-            commandSender.sendMessage(output);
         }
         return true;
 
     }
 
     /**
+     * //TODO Remake
+     *
      * @param type
      * @param source
      * @param args
      * @return
      */
-    public static Entity create(Object type, Position source, Object... args) {
+    public static Entity create(String type, Position source, Object... args) {
         FullChunk chunk = source.getLevel().getChunk((int) source.x >> 4, (int) source.z >> 4, true);
 
-        if (chunk.getEntities().size() > 10) {
-            FileLogger.debug(String.format("Not spawning mob because the chunk already has too many mobs!"));
-            return null;
-        }
-
         CompoundTag nbt = new CompoundTag().putList(new ListTag<DoubleTag>("Pos").add(new DoubleTag("", source.x)).add(new DoubleTag("", source.y)).add(new DoubleTag("", source.z)))
-                .putList(new ListTag<DoubleTag>("Motion").add(new DoubleTag("", 0)).add(new DoubleTag("", 0)).add(new DoubleTag("", 0)))
-                .putList(new ListTag<FloatTag>("Rotation").add(new FloatTag("", source instanceof Location ? (float) ((Location) source).yaw : 0))
-                        .add(new FloatTag("", source instanceof Location ? (float) ((Location) source).pitch : 0)));
+        .putList(new ListTag<DoubleTag>("Motion").add(new DoubleTag("", 0)).add(new DoubleTag("", 0)).add(new DoubleTag("", 0)))
+        .putList(new ListTag<FloatTag>("Rotation").add(new FloatTag("", source instanceof Location ? (float) ((Location) source).yaw : 0))
+        .add(new FloatTag("", source instanceof Location ? (float) ((Location) source).pitch : 0)));
 
-        return Entity.createEntity(type.toString(), chunk, nbt, args);
+        return Entity.createEntity(type, chunk, nbt, args);
     }
+    
+    /**
+     * Gets the pet the given player is currently riding.
+     *
+     * @param player
+     *
+     * @return BasePet
+     *
+    public void getRiddenMob(Player player) {
+        for (this.getMobsFrom(player)  ) {
+            if (mob.isRidden()) {
+                return pet;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if the given player is currently riding a pet.
+     *
+     * @param player
+     * @return bool
+     *
+    public boolean isRidingAMob(Player player) {
+        for (this.getMobsFrom(player) ) {
+            if (mob.isRidden()) {
+                return true;
+            }
+        }
+        return false;
+    }*/
 
 }

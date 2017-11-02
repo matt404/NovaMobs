@@ -12,7 +12,7 @@ commands:
   mob:
     description: Spawn a simple mob to the player, that is using this command
     aliases: ["mob"]
-    usage: ""
+    usage: /mob
     permission: novamobs.mob  
     
 permissions:
