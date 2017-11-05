@@ -6,7 +6,7 @@ Development: **[PikyCZ](https://github.com/PikyCZ)**
 [![GitHub release](https://img.shields.io/github/release/PikyCZ/NovaMobs.svg)](https://github.com/PikyCZ/NovaMobs/releases/latest)
 [![](https://img.shields.io/badge/stable-status-brightgreen.svg)](status/status.md)
 
-NovaMobs is a plugin that implements the mob entities for MCPE including movement, aggression etc.
+NovaMobs is a plugin that implements the mob entities for MCPE including movement.
 
 # Commands
 -----------
@@ -39,9 +39,9 @@ auto-spawn-tick: 20
 
  Download
  ---------
-__[Jar Download at Circle CI](https://circleci.com/gh/PikyCZ/MobPlugin/tree/master/)__ (**login required**)
+__[Jar Download from Circle CI](https://circleci.com/gh/PikyCZ/MobPlugin/tree/master/)__ (**login required**)
 
-__[Jar Download at Releases tab](https://github.com/PikyCZ/NovaMobs/releases)__ (**WorkingVersions**)
+__[Jar Download from Releases tab](https://github.com/PikyCZ/NovaMobs/releases)__ (**WorkingVersions**)
 
 # Contributed code since 2016
 * [PikyCZ](//github.com/PikyCZ)
