@@ -1,5 +1,6 @@
 package com.pikycz.novamobs.advance.riding;
 
+import cn.nukkit.entity.Entity;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.server.DataPacketReceiveEvent;
 import cn.nukkit.math.Vector3;
@@ -18,5 +19,10 @@ public class RidingListener implements Rideable, Listener {
     public Vector3 getRidePosition() {
         return null;
     }
-    
+
+    @Override
+    public boolean mountEntity(Entity entity){
+        return true;
+    }
+
 }

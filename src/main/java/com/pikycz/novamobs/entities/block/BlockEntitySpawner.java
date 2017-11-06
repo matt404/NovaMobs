@@ -29,6 +29,8 @@ public class BlockEntitySpawner extends BlockEntitySpawnable {
 
     public BlockEntitySpawner(FullChunk chunk, CompoundTag nbt) {
         super(chunk, nbt);
+        System.out.println(this.getName());
+        System.out.println(this.namedTag);
 
         if (this.namedTag.contains("EntityId")) {
             this.entityId = this.namedTag.getInt("EntityId");
@@ -88,7 +90,7 @@ public class BlockEntitySpawner extends BlockEntitySpawnable {
                     double x = this.getX() + (this.level.rand.nextDouble() - this.level.rand.nextDouble()) * (double) this.spawnRange + 0.5;
                     double y = (this.getY() + this.level.rand.nextInt(2)/* - 1*/);
                     double z = this.getZ() + (this.level.rand.nextDouble() - this.level.rand.nextDouble()) * (double) this.spawnRange + 0.5;
-                    Entity entity = NovaMobs.create(this.entityId, new Position(x, y, z, this.level));
+                    Entity entity = NovaMobs.create(this.getName(), new Position(x, y, z, this.level));
                     if (entity != null) {
                         entity.spawnToAll();
                     }

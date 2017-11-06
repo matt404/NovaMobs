@@ -1,6 +1,7 @@
 package com.pikycz.novamobs.entities.animal.walking;
 
 import cn.nukkit.Player;
+import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.EntityCreature;
 import cn.nukkit.entity.EntityRideable;
 import cn.nukkit.event.entity.EntityDamageByEntityEvent;
@@ -42,6 +43,11 @@ public class ZombieHorse extends WalkingAnimal implements EntityRideable {
     public void initEntity() {
         super.initEntity();
         this.setMaxHealth(15);
+    }
+
+    @Override
+    public boolean mountEntity(Entity entity){
+        return true;
     }
 
     @Override

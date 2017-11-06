@@ -61,6 +61,11 @@ public class Mule extends WalkingAnimal implements EntityRideable {
     }
 
     @Override
+    public boolean mountEntity(Entity entity){
+        return true;
+    }
+
+    @Override
     public boolean targetOption(EntityCreature creature, double distance) {
         if (creature instanceof Player) {
             Player player = (Player) creature;

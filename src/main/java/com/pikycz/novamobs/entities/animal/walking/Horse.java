@@ -63,6 +63,11 @@ public class Horse extends WalkingAnimal implements EntityRideable {
     }
 
     @Override
+    public boolean mountEntity(Entity entity){
+        return true;
+    }
+
+    @Override
     public Item[] getDrops() {
         List<Item> drops = new ArrayList<>();
         if (this.lastDamageCause instanceof EntityDamageByEntityEvent) {
