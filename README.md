@@ -36,6 +36,52 @@ spawn-mobs: true
 #Spawning Frequency -- default 20ticks
 auto-spawn-tick: 20
 ```
+#Mobs
+-----
+
+### Animals
+##### Flying
+* Bat
+* Parrot
+
+##### Walking
+* Chicken
+* Cow
+* Donkey
+* Horse
+* Llama
+* Mooshroom
+* Mule
+* Ocelot
+* Pig
+* PolarBear
+* Rabbit
+* Sheep
+* SkeletonHorse
+* Villager
+* ZombieHorse
+
+### Monsters
+##### Flying
+* Blaze
+* EnderDragon
+* Ghast
+* Wither
+
+##### Walking
+* CaveSpider
+* Creeper
+* Enderman
+* Husk
+* PigZombie
+* Shulker
+* Silverfish
+* Skeleton
+* Spider
+* Stray
+* Witch
+* WitherSkeleton
+* Wolf
 
  Download
  ---------
